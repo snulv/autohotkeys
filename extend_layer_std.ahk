@@ -256,3 +256,64 @@ RAlt::
     SetCapsLockState, AlwaysOff
   } 
 Return
+
+; training disables
+$Enter::return
+$Backspace::return
+SC00D::return ; =
+Shift & SC00D::return ; +
+SC00C::return ; -
+Shift & SC00C::return ; _
+Shift & SC00A::return ; (
+Shift & SC00B::return ; )
+
+SC01A::return ; [
+SC01B::return ; ]
+Shift & SC01A::return ; {
+Shift & SC01B::return ; }
+
+
+; start RHIFT binginds
+
+; middle row
+RShift & SC01E::
+    Send {+}
+return
+
+RShift & SC01F::
+    Send {=}
+return
+
+RShift & SC020::
+    Send {[}
+return
+
+RShift & SC021::
+    Send {(}
+return
+
+RShift & SC022::
+    Send {{}
+return
+
+; bottom row
+
+RShift & SC02C::
+    Send {-}
+return
+
+RShift & SC02D::
+    Send {_}
+return
+
+RShift & SC02E::
+    Send {]}
+return
+
+RShift & SC02F::
+    Send {)}
+return
+
+RShift & SC030::
+    Send {}}
+return
