@@ -275,6 +275,27 @@ Shift & SC01B::return ; }
 
 ; start RHIFT binginds
 
+; top row
+RShift & SC010::
+  Send {<}
+return
+
+RShift & SC011::
+  Send {>}
+return
+
+RShift & SC012::
+  Send {:}
+return
+
+RShift & SC013::
+  Send {;}
+return
+
+RShift & SC014::
+  Send {*}
+return
+
 ; middle row
 RShift & SC01E::
     Send {+}
@@ -297,7 +318,6 @@ RShift & SC022::
 return
 
 ; bottom row
-
 RShift & SC02C::
     Send {-}
 return
