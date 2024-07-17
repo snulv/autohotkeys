@@ -16,26 +16,11 @@ Komorebic(cmd) {
 ; }
 *CapsLock::return                                   ; This forces capslock into a modifying key.
 
+; Capslock modified hotkeys
 #HotIf GetKeyState("CapsLock", "P")
-
-; ---- Your hotkeys go here! ----
 
 ; digit row
 SC001::return
-;SC002::Send "{Blind}{F1}"
-;SC003::Send "{Blind}{F2}"
-;SC004::Send "{Blind}{F3}"
-;SC005::Send "{Blind}{F4}"
-;SC006::Send "{Blind}{F5}"
-;SC007::Send "{Blind}{F6}"
-;SC008::Send "{Blind}{F7}"
-;SC009::Send "{Blind}{F8}"
-SC00A::Send "{Blind}{F9}"
-SC00B::Send "{Blind}{F10}"
-SC00C::Send "{Blind}{F11}"
-SC00D::Send "{Blind}{F12}"
-
-
 SC002::workspaces("0")
 SC003::workspaces("1")
 SC004::workspaces("2")
@@ -44,33 +29,16 @@ SC006::workspaces("4")
 SC007::workspaces("5")
 SC008::workspaces("6")
 SC009::workspaces("7")
-; top row
+SC00A::return
+SC00B::return
+SC00C::return
+SC00D::return
 
-SC010::Komorebic("cycle-focus previous")
-SC011::Komorebic("cycle-focus next")
-SC012::return
-SC013::return
-;SC012::
-;  {
-;    MouseGetPos,,,win
-;    WinGetClass, class, ahk_id %win%
-;    If class in Progman,WorkerW
-;      send {Click}^#{Left}
-;    else
-;      send ^#{Left}  ; Previous Desktop  
-;    return
-;  }
-;
-;SC013::
-;  {
-;    MouseGetPos,,,win
-;    WinGetClass, class, ahk_id %win%
-;    If class in Progman,WorkerW
-;        send {Click}^#{Right}  
-;    else
-;        send ^#{Right}  ; Next  Desktop  
-;    return
-;  }
+; top row
+SC010::cycle("previous")
+SC011::cycle("next")
+SC012::Komorebic("cycle-workspace previous")
+SC013::Komorebic("cycle-workspace next")
 SC014::Send "{Esc}"
 *SC015::send_mods("PgUp")
 *SC016::send_mods("Home")
@@ -79,12 +47,11 @@ SC014::Send "{Esc}"
 *SC019::Send "{Blind}{Del}"
 SC01A:: SetCapsLockState !GetKeyState('CapsLock', 'T')
 
-
 ; middle row
-*SC01E::return
-*SC01F::return
-*SC020::return
-*SC021::return
+*SC01E::return ; Disabled and reimplemented in send_mods function
+*SC01F::return ; Disabled and reimplemented in send_mods function
+*SC020::return ; Disabled and reimplemented in send_mods function
+*SC021::return ; Disabled and reimplemented in send_mods function
 *SC022::return
 *SC023::send_mods("PgDn")
 *SC024::send_mods("Left")
@@ -110,8 +77,6 @@ Space::Send "{Enter}"
 
 #HotIf
 
-
-
 send_mods(key) {
   mods := ""
        .  (GetKeyState("SC01E", "P") ? "!" : "")
@@ -129,20 +94,40 @@ workspaces(wrkspNumber) {
   }
 }
 
+cycle(direction) {
+  if GetKeyState("SC020", "P") {
+    Komorebic(format("cycle-move {}", direction))
+  } else {
+    Komorebic(format("cycle-focus {}", direction))
+  }
+}
 
-; Homerow special keys
+; Rshift modified hotkeys
+
+; digit row
+RShift & SC002::Komorebic("change-layout bsp")
+RShift & SC003::Komorebic("change-layout grid")
+RShift & SC004::Komorebic("change-layout rows")
+RShift & SC005::Komorebic("change-layout vertical-stack")
+RShift & SC006::Komorebic("change-layout ultrawide-vertical-stack")
+RShift & SC007::Komorebic("change-layout columns")
+RShift & SC008::Komorebic("change-layout horizontal-stack")
+RShift & SC009::Komorebic("change-layout right-main-vertical-stack")
+
 ; top row
 RShift & SC010::Send "{<}"
 RShift & SC011::Send "{>}"
 RShift & SC012::Send "{:}"
 RShift & SC013::Send "{;}"
 RShift & SC014::Send "{*}"
+
 ; middle row
 RShift & SC01E::Send "{+}"
 RShift & SC01F::Send "{=}"
 RShift & SC020::Send "{[}"
 RShift & SC021::Send "{(}"
 RShift & SC022::Send "{{}"
+
 ; bottom rows
 RShift & SC02C::Send "{-}"
 RShift & SC02D::Send "{_}"
