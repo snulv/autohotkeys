@@ -126,12 +126,12 @@ RShift & SC02E:: Send "{]}"
 RShift & SC02F:: Send "{)}"
 RShift & SC030:: Send "{}}"
 
-^!SC011:: Send "{æ}"
-+^!SC011:: Send "{Æ}"
+^!SC02C:: Send "{æ}"
++^!SC02C:: Send "{Æ}"
 ^!SC013:: Send "{ø}"
 +^!SC013:: Send "{Ø}"
-^!SC02C:: Send "{å}"
-+^!SC02C:: Send "{Å}"
+^!SC011:: Send "{å}"
++^!SC011:: Send "{Å}"
 
 $LWin::
 {
