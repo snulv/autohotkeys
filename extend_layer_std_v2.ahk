@@ -132,3 +132,14 @@ RShift & SC030:: Send "{}}"
 +^!SC013:: Send "{Ø}"
 ^!SC02C:: Send "{å}"
 +^!SC02C:: Send "{Å}"
+
+$LWin::
+{
+    if KeyWait("LWin", "T0.2") {  ; returns true if key was released within 200ms
+        Send("^{Space}")             ; send Ctrl+Space
+    } else {
+        Send("{LWin Down}")       ; hold LWin down
+        KeyWait("LWin")           ; wait for release
+        Send("{LWin Up}")         ; release LWin
+    }
+}
