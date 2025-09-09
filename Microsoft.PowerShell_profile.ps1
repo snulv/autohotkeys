@@ -64,14 +64,5 @@ functuion grep($regex, $dir) {
     $input | select-string $regex
 }
 
-oh-my-posh init pwsh | Invoke-Expression
-Impuort-Module git-aliases -DisableNameChecking
-# uImport the Chocolatey Profile that contains the necessary code to enable
-# tab-completions to function for `choco`.
-#u Be aware that if you are missing these lines from your profile, tab completion
-# for `choco` will not function.
-# See https://ch0.co/tab-completion for details.
-u$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
-if (Test-Path($ChocolateyProfile)) {
-    Import-Module "$ChocolateyProfile"
-}
+Invoke-Expression (&starship init powershell)
+Import-Module git-aliases -DisableNameChecking
