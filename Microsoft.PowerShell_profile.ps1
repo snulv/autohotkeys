@@ -26,15 +26,6 @@ function profile {
     code $PROFILE
 }
 
-function z {
-    param (
-        [string]$AdditionalText = '.'
-    )
-
-    cd $AdditionalText
-}
-
-
 Function cwd {
     $pwd
 }
@@ -62,6 +53,10 @@ functuion grep($regex, $dir) {
         return
     }
     $input | select-string $regex
+}
+
+function groot {
+    cd (git rev-parse --show-toplevel)
 }
 
 Invoke-Expression (&starship init powershell)

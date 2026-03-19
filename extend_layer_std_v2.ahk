@@ -26,8 +26,8 @@ SC00C:: return
 SC00D:: return
 
 ; top row
-SC010:: return
-SC011:: return
+SC010:: sendWinCommand("Left")
+SC011:: sendWinCommand("Right")
 SC012:: cycleWorkspace("prev")
 SC013:: cycleWorkspace("next")
 SC014:: Glazewm("toggle-minimized")
@@ -69,12 +69,27 @@ Space:: Send "{Enter}"
 #HotIf
 
 send_mods(key) {
+    if (GetKeyState("SC01F", "P")) {
+        sendWinCommand(key)
+        return
+    }
+
     mods := ""
         . (GetKeyState("SC01E", "P") ? "!" : "")
         . (GetKeyState("SC01F", "P") ? "#" : "")
         . (GetKeyState("SC020", "P") ? "+" : "")
         . (GetKeyState("SC021", "P") ? "^" : "")
     SendInput mods "{" key "}"
+}
+
+sendWinCommand(key) {
+    if (key = "Left") {
+        Glazewm("focus --direction left")
+    } else if (key = "Right") {
+        Glazewm("focus --direction right")
+    } else if (key = "Up") {
+        Glazewm("toggle-fullscreen")
+    }
 }
 
 workspaces(wrkspNumber) {
@@ -133,13 +148,14 @@ RShift & SC030:: Send "{}}"
 ^!SC011:: Send "{å}"
 +^!SC011:: Send "{Å}"
 
-$LWin::
-{
-    if KeyWait("LWin", "T0.2") {  ; returns true if key was released within 200ms
-        Send("^{Space}")             ; send Ctrl+Space
-    } else {
-        Send("{LWin Down}")       ; hold LWin down
-        KeyWait("LWin")           ; wait for release
-        Send("{LWin Up}")         ; release LWin
-    }
-}
+; #Space:: Send("^{Space}")
+; $LWin::
+; {
+;     if KeyWait("LWin", "T0.1") {  ; returns true if key was released within 100ms
+;         Send("^{Space}")             ; send Ctrl+Space
+;     } else {
+;         Send("{LWin Down}")       ; hold LWin down
+;         KeyWait("LWin")           ; wait for release
+;         Send("{LWin Up}")         ; release LWin
+;     }
+; }
