@@ -61,3 +61,5 @@ function groot {
 
 Invoke-Expression (&starship init powershell)
 Import-Module git-aliases -DisableNameChecking
+Install-Module z -AllowClobber
+Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
