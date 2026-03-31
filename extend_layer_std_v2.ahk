@@ -148,6 +148,30 @@ RShift & SC030:: Send "{}}"
 ^!SC011:: Send "{å}"
 +^!SC011:: Send "{Å}"
 
+move_workspaces(wrkspNumber) {
+    Glazewm(format("move --workspace {}", wrkspNumber))
+}
+
+F1:: workspaces("1")
+F2:: workspaces("2")
+F3:: workspaces("3")
+F4:: workspaces("4")
+F5:: workspaces("5")
+F6:: workspaces("6")
+F7:: workspaces("7")
+F8:: workspaces("8")
+F9:: workspaces("9")
+
+LShift & F1:: move_workspaces("1")
+LShift & F2:: move_workspaces("2")
+LShift & F3:: move_workspaces("3")
+LShift & F4:: move_workspaces("4")
+LShift & F5:: move_workspaces("5")
+LShift & F6:: move_workspaces("6")
+LShift & F7:: move_workspaces("7")
+LShift & F8:: move_workspaces("8")
+LShift & F9:: move_workspaces("9")
+
 ; #Space:: Send("^{Space}")
 ; $LWin::
 ; {
