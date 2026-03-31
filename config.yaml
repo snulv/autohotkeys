@@ -142,7 +142,7 @@ window_rules:
     match:
       # Ignores any Zebar windows.
       - window_process: { equals: "zebar" }
-      - window_process: { equals: "mstsc" }
+      - window_process: { equals: "ConEmu64" }
       - window_process: { equals: "WindowsTerminal" }
       - window_title: { equals: "Command Palette" }
 
@@ -165,6 +165,12 @@ window_rules:
         window_class: { not_regex: "OpusApp" }
       - window_process: { equals: "POWERPNT" }
         window_class: { not_regex: "PPTFrameClass" }
+
+      # Specific games
+      - window_title: { equals: "Warcraft III" }
+      ## World of warcraft classic
+      - window_title: { equals: "World of Warcraft" }
+        window_class: { equals: "GxWindowClass" }
 
 binding_modes:
   # When enabled, the focused window can be resized via arrow keys or HJKL.
@@ -189,7 +195,7 @@ keybindings:
   - commands: ["focus --direction right"]
     bindings: ["alt+l", "lwin+right"]
   - commands: ["focus --direction up"]
-    bindings: ["alt+k", "lwin+up"]
+    bindings: ["alt+k"]
   - commands: ["focus --direction down"]
     bindings: ["alt+j", "lwin+down"]
 
@@ -243,11 +249,11 @@ keybindings:
 
   # Change the focused window to be fullscreen.
   - commands: ["toggle-fullscreen"]
-    bindings: ["alt+f"]
+    bindings: ["alt+f", "lwin+up"]
 
   # Minimize focused window.
   - commands: ["toggle-minimized"]
-    bindings: ["alt+m"]
+    bindings: ["alt+m", "lwin+down"]
 
   # Close focused window.
   - commands: ["close"]
@@ -277,9 +283,14 @@ keybindings:
   - commands: ["focus --prev-active-workspace"]
     bindings: ["alt+a"]
 
+  - commands: ["focus --next-workspace"]
+    bindings: ["lwin+page_up"]
+  - commands: ["focus --prev-workspace"]
+    bindings: ["lwin+page_down"]
+
   # Focus the workspace that last had focus.
   - commands: ["focus --recent-workspace"]
-    bindings: ["alt+d"]
+    bindings: ["alt+d", "lwin+home"]
 
   # Change focus to a workspace defined in `workspaces` config.
   # - commands: ["focus --workspace 1"]
